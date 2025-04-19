@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contribute</title>
+</head>
+<body>
+    <h2>Make a Contribution</h2>
+    <form method="POST">
+        {{ form.csrf_token }}
+        <p>{{ form.amount.label }} {{ form.amount() }}</p>
+        <p>{{ form.description.label }} {{ form.description() }}</p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    <p><a href="{{ url_for('dashboard') }}">Back to Dashboard</a></p>
+</body>
+</html>

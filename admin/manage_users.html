@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Users</title>
+</head>
+<body>
+    <h2>Manage Users</h2>
+    <p><a href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a> | <a href="{{ url_for('logout') }}">Logout</a></p>
+    <ul>
+        {% for user in users %}
+            <li>{{ user.username }} ({{ user.email }}) | Admin: {% if user.is_admin %}Yes{% else %}No{% endif %} | <a href="{{ url_for('admin_edit_user', user_id=user.id) }}">Edit</a></li>
+        {% else %}
+            <li>No users registered.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Withdrawals</title>
+</head>
+<body>
+    <h2>Manage Withdrawal Requests</h2>
+    <p><a href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a> | <a href="{{ url_for('logout') }}">Logout</a></p>
+    <ul>
+        {% for withdrawal in withdrawals %}
+            <li>User ID: {{ withdrawal.user_id }}, Amount: KES {{ withdrawal.amount }}, Requested: {{ withdrawal.request_date.strftime('%Y-%m-%d') }}, Status: {{ withdrawal.approval_status }} | <a href="{{ url_for('admin_approve_withdrawal', withdrawal_id=withdrawal.id) }}">Approve</a> | <a href="{{ url_for('admin_reject_withdrawal', withdrawal_id=withdrawal.id) }}">Reject</a></li>
+        {% else %}
+            <li>No withdrawal requests.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

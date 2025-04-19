@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h2>Welcome, {{ current_user.username }}!</h2>
+    <p><a href="{{ url_for('contribute') }}">Make a Contribution</a> | <a href="{{ url_for('request_withdrawal') }}">Request Withdrawal</a> | <a href="{{ url_for('logout') }}">Logout</a></p>
+    <h3>Your Contributions</h3>
+    <ul>
+        {% for contribution in contributions %}
+            <li>KES {{ contribution.amount }} on {{ contribution.contribution_date.strftime('%Y-%m-%d') }} {% if contribution.description %} - {{ contribution.description }}{% endif %}</li>
+        {% else %}
+            <li>No contributions yet.</li>
+        {% endfor %}
+    </ul>
+    <h3>Your Withdrawal Requests</h3>
+    <ul>
+        {% for withdrawal in withdrawals %}
+            <li>KES {{ withdrawal.amount }} requested on {{ withdrawal.request_date.strftime('%Y-%m-%d') }} (Status: {{ withdrawal.approval_status }}) {% if withdrawal.reason %} - {{ withdrawal.reason }}{% endif %}</li>
+        {% else %}
+            <li>No withdrawal requests yet.</li>
+        {% endfor %}
+    </ul>
+    {% if current_user.is_admin %}
+        <hr>
+        <h3>Admin Actions</h3>
+        <p><a href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a></p>
+    {% endif %}
+</body>
+</html>
